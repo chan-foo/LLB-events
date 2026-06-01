@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lac La Biche Community Events 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #1E3A5F;
+    --teal:       #1D9E75;
+    --teal-light: #E1F5EE;
+    --orange:     #E07B2A;
+    --orange-light:#FFF0E0;
+    --sand:       #F7F3EE;
+    --ink:        #1A1A2E;
+    --muted:      #7A7A8C;
+    --border:     #E2DDD7;
+    --white:      #FFFFFF;
+
+    --cat-community:  #E1F5EE; --cat-community-t: #0F6E56;
+    --cat-music:      #EEEDFE; --cat-music-t:     #3C3489;
+    --cat-food:       #FAEEDA; --cat-food-t:      #633806;
+    --cat-civic:      #E6F1FB; --cat-civic-t:     #0C447C;
+    --cat-sport:      #FAECE7; --cat-sport-t:     #712B13;
+    --cat-arts:       #FBEAF0; --cat-arts-t:      #72243E;
+    --cat-festival:   #EAF3DE; --cat-festival-t:  #27500A;
+    --cat-county:     #9FE1CB; --cat-county-t:    #085041;
+    --cat-council:    #B5D4F4; --cat-council-t:   #0C447C;
+    --cat-recreation: #FFF0E0; --cat-recreation-t:#7A4010;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--sand);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(30,58,95,0.18);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 24px 14px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .header-title { flex: 1; min-width: 200px; }
+  .header-title h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 3vw, 26px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .header-title p {
+    font-size: 12px;
+    opacity: 0.65;
+    margin-top: 3px;
+    font-weight: 300;
+  }
+  .header-badge {
+    background: var(--teal);
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* ── CONTROLS ── */
+  .controls {
+    max-width: 1100px;
+    margin: 20px auto 0;
+    padding: 0 24px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 340px;
+  }
+  .search-wrap svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  input[type=search] {
+    width: 100%;
+    padding: 9px 12px 9px 36px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    background: white;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input[type=search]:focus { border-color: var(--teal); }
+
+  .filter-wrap { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-btn {
+    padding: 7px 13px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--muted);
+  }
+  .filter-btn:hover { border-color: var(--navy); color: var(--navy); }
+  .filter-btn.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: white;
+  }
+  .filter-btn.active.cat-community  { background: var(--cat-community-t);  border-color: var(--cat-community-t);  }
+  .filter-btn.active.cat-music      { background: var(--cat-music-t);       border-color: var(--cat-music-t);      }
+  .filter-btn.active.cat-food       { background: var(--cat-food-t);        border-color: var(--cat-food-t);       }
+  .filter-btn.active.cat-sport      { background: var(--cat-sport-t);       border-color: var(--cat-sport-t);      }
+  .filter-btn.active.cat-festival   { background: var(--cat-festival-t);    border-color: var(--cat-festival-t);   }
+  .filter-btn.active.cat-arts       { background: var(--cat-arts-t);        border-color: var(--cat-arts-t);       }
+  .filter-btn.active.cat-civic      { background: var(--cat-civic-t);       border-color: var(--cat-civic-t);      }
+  .filter-btn.active.cat-county     { background: var(--cat-county-t);      border-color: var(--cat-county-t);     }
+  .filter-btn.active.cat-council    { background: var(--cat-council-t);     border-color: var(--cat-council-t);    }
+
+  .result-count {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    padding: 7px 0;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    max-width: 1100px;
+    margin: 12px auto 0;
+    padding: 0 24px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--muted);
+    align-items: center;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 1100px;
+    margin: 20px auto 60px;
+    padding: 0 24px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy);
+    padding: 10px 0 8px;
+    border-bottom: 2px solid var(--navy);
+    margin: 32px 0 14px;
+    opacity: 0.7;
+  }
+  .section-header:first-child { margin-top: 4px; }
+
+  /* ── TABLE ── */
+  .events-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    font-size: 13px;
+  }
+  .events-table thead th {
+    background: var(--navy);
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .events-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+  .events-table tbody tr:last-child { border-bottom: none; }
+  .events-table tbody tr:hover { background: #F9F6F2; }
+  .events-table td {
+    padding: 11px 14px;
+    vertical-align: top;
+    line-height: 1.45;
+  }
+
+  .td-date { white-space: nowrap; font-weight: 500; color: var(--navy); font-size: 12.5px; }
+  .td-day  { color: var(--muted); font-size: 11.5px; white-space: nowrap; }
+  .td-event { font-weight: 500; }
+  .td-event .ev-notes { font-size: 11.5px; color: var(--muted); font-weight: 300; margin-top: 2px; }
+  .td-loc   { color: #444; font-size: 12px; }
+  .td-time  { white-space: nowrap; color: var(--muted); font-size: 12px; }
+
+  /* src stripe */
+  .src-county { border-left: 3px solid var(--teal); }
+  .src-new    { border-left: 3px solid var(--orange); }
+
+  /* category badge */
+  .cat-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+  .badge-Community  { background: var(--cat-community);  color: var(--cat-community-t); }
+  .badge-Music      { background: var(--cat-music);       color: var(--cat-music-t); }
+  .badge-Food       { background: var(--cat-food);        color: var(--cat-food-t); }
+  .badge-Civic      { background: var(--cat-civic);       color: var(--cat-civic-t); }
+  .badge-Sport      { background: var(--cat-sport);       color: var(--cat-sport-t); }
+  .badge-Arts       { background: var(--cat-arts);        color: var(--cat-arts-t); }
+  .badge-Festival   { background: var(--cat-festival);    color: var(--cat-festival-t); }
+  .badge-County     { background: var(--cat-county);      color: var(--cat-county-t); }
+  .badge-Council    { background: var(--cat-council);     color: var(--cat-council-t); }
+  .badge-Recreation { background: var(--cat-recreation);  color: var(--cat-recreation-t); }
+
+  /* ── NO RESULTS ── */
+  .no-results {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 28px 24px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    background: white;
+  }
+  footer a { color: var(--teal); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ── RESPONSIVE ── */
+  .hide-mobile { display: table-cell; }
+  @media (max-width: 640px) {
+    .hide-mobile { display: none; }
+    .header-inner { padding: 14px 16px 12px; }
+    .controls, .legend, main { padding: 0 14px; }
+    .events-table td { padding: 10px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-title">
+      <h1>Lac La Biche Community Events</h1>
+      <p>May – August 2026 &nbsp;·&nbsp; Updated June 1, 2026</p>
+    </div>
+    <span class="header-badge">87 events</span>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="search" id="searchInput" placeholder="Search events, locations…" oninput="applyFilters()">
+  </div>
+  <div class="filter-wrap" id="filterBtns">
+    <button class="filter-btn active" data-cat="All" onclick="setCategory(this)">All</button>
+    <button class="filter-btn cat-festival"   data-cat="Festival"   onclick="setCategory(this)">Festival</button>
+    <button class="filter-btn cat-music"      data-cat="Music"      onclick="setCategory(this)">Music</button>
+    <button class="filter-btn cat-sport"      data-cat="Sport"      onclick="setCategory(this)">Sport</button>
+    <button class="filter-btn cat-food"       data-cat="Food"       onclick="setCategory(this)">Food</button>
+    <button class="filter-btn cat-community"  data-cat="Community"  onclick="setCategory(this)">Community</button>
+    <button class="filter-btn cat-arts"       data-cat="Arts"       onclick="setCategory(this)">Arts</button>
+    <button class="filter-btn cat-civic"      data-cat="Civic"      onclick="setCategory(this)">Civic</button>
+    <button class="filter-btn cat-county"     data-cat="County"     onclick="setCategory(this)">County</button>
+    <button class="filter-btn cat-council"    data-cat="Council"    onclick="setCategory(this)">Council</button>
+  </div>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div> Lac La Biche County official</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div> Newly found via web crawl</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--border)"></div> YourLocalBuzz / AllEvents / Tourism</div>
+</div>
+
+<main id="mainContent"></main>
+
+<footer>
+  Sources: <a href="https://laclabichecounty.com/p/upcoming-events" target="_blank">laclabichecounty.com</a> &nbsp;·&nbsp;
+  <a href="https://www.yourlocalbuzz.ca/event/category/list" target="_blank">yourlocalbuzz.ca</a> &nbsp;·&nbsp;
+  <a href="https://allevents.in/lac-la-biche/all" target="_blank">allevents.in</a> &nbsp;·&nbsp;
+  <a href="https://www.laclabicheregion.com/" target="_blank">laclabicheregion.com</a> &nbsp;·&nbsp;
+  <a href="https://www.lakelandtoday.ca/lac-la-biche-news" target="_blank">lakelandtoday.ca</a> &nbsp;·&nbsp;
+  <a href="https://www.laclabichemission.com/upcoming-events" target="_blank">laclabichemission.com</a>
+</footer>
+
+<script>
+const EVENTS = [{"section": "MAY 21\u201331", "date": "2026-05-21", "day": "Thu", "event": "Free Bannock & Coffee", "location": "Lord of Glory Lutheran Church, 9501-99th St", "time": "11:00 AM\u20131:00 PM", "category": "Community", "notes": "yourlocalbuzz.ca \u00b7 Every Tuesday", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-21", "day": "Thu", "event": "Souper Thursday", "location": "Stone Soup, 10140-102 St Unit 101", "time": "11:30 AM\u20131:30 PM", "category": "Food", "notes": "yourlocalbuzz.ca \u00b7 Monthly", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-21", "day": "Thu", "event": "Community Thrift Days (Day 1)", "location": "10140-102 St, Unit 101", "time": "11:00 AM\u20135:30 PM", "category": "Community", "notes": "yourlocalbuzz.ca \u00b7 Also May 22", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-21", "day": "Thu", "event": "Water Not Coal Petition Signing", "location": "10204 101 St", "time": "3:00\u20135:00 PM", "category": "Civic", "notes": "yourlocalbuzz.ca \u00b7 Organized by Corb Lund", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-22", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "MAY 21\u201331", "date": "2026-05-22", "day": "Fri", "event": "Community Thrift Days (Day 2)", "location": "10140-102 St, Unit 101", "time": "11:00 AM\u20135:30 PM", "category": "Community", "notes": "yourlocalbuzz.ca", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-22", "day": "Fri", "event": "Lac La Biche Mission AGM", "location": "67453 Mission Rd", "time": "6:00 PM", "category": "Civic", "notes": "yourlocalbuzz.ca", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-22", "day": "Fri", "event": "Steak Night & Live Music \u2013 Stacy Desjarlais", "location": "Royal Canadian Legion, 10101 Churchill Drive", "time": "6:00\u20138:00 PM", "category": "Music", "notes": "yourlocalbuzz.ca", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-22", "day": "Fri", "event": "Year End Showcase \u2013 Show 1 (Solos/Duets/Trios)", "location": "Portage College", "time": "6:00 PM", "category": "Arts", "notes": "allevents.in", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-23", "day": "Sat", "event": "Food Safety AB Certification Course (Day 1 of 2)", "location": "10140-102 St, Unit 101", "time": "8:00 AM all day", "category": "Civic", "notes": "allevents.in \u00b7 Also May 24 \u00b7 AHS approved", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-23", "day": "Sat", "event": "Salvaged Asset Liquidation Auction: Gas Yard", "location": "Lac La Biche County", "time": "9:00 AM\u201312:00 PM", "category": "County", "notes": "laclabichecounty.com", "src": "county"}, {"section": "MAY 21\u201331", "date": "2026-05-23", "day": "Sat", "event": "Salvaged Asset Liquidation Auction: Sentinel Yard", "location": "Lac La Biche County", "time": "1:00\u20133:00 PM", "category": "County", "notes": "laclabichecounty.com", "src": "county"}, {"section": "MAY 21\u201331", "date": "2026-05-23", "day": "Sat", "event": "Lord of Glory Starter Plant Giveaway", "location": "9501-99th St", "time": "10:00 AM\u20134:30 PM", "category": "Community", "notes": "yourlocalbuzz.ca \u00b7 Free plants", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-23", "day": "Sat", "event": "3rd Annual Ladies Spring Plant Swap & Luncheon", "location": "Evangelical Free Church", "time": "10:00 AM", "category": "Community", "notes": "allevents.in", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-23", "day": "Sat", "event": "Year End Showcase \u2013 Shows 2 & 3 (Full-Year Dancers)", "location": "Portage College", "time": "Evening", "category": "Arts", "notes": "allevents.in", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-25", "day": "Mon", "event": "Emergency Advisory Committee Meeting", "location": "Lac La Biche County", "time": "10:00 AM\u201312:00 PM", "category": "Council", "notes": "laclabichecounty.com", "src": "county"}, {"section": "MAY 21\u201331", "date": "2026-05-25", "day": "Mon", "event": "50+ & Seniors Week Open House", "location": "Heritage Centre, 10112-102 Ave", "time": "3:00\u20137:00 PM", "category": "Community", "notes": "yourlocalbuzz.ca \u00b7 Runs May 25\u2013June 6", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-27", "day": "Wed", "event": "Game Changer", "location": "Lac La Biche County", "time": "6:30\u20138:30 PM", "category": "County", "notes": "laclabichecounty.com", "src": "county"}, {"section": "MAY 21\u201331", "date": "2026-05-27", "day": "Wed", "event": "Crib Night", "location": "Royal Canadian Legion, 10101 Churchill Drive", "time": "6:30\u20138:00 PM", "category": "Community", "notes": "yourlocalbuzz.ca \u00b7 Every Wednesday", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-28", "day": "Thu", "event": "KidSport BBQ", "location": "Next to The Stitchin' Man, 10229 101 Ave", "time": "11:00 AM\u20131:00 PM", "category": "Food", "notes": "yourlocalbuzz.ca", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-29", "day": "Fri", "event": "Reverse Trade Fair for Contractors", "location": "Lac La Biche County", "time": "2:00\u20134:00 PM", "category": "County", "notes": "laclabichecounty.com", "src": "county"}, {"section": "MAY 21\u201331", "date": "2026-05-29", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "MAY 21\u201331", "date": "2026-05-29", "day": "Fri", "event": "Steak Night, Live Music & Open Mic Jam", "location": "Royal Canadian Legion, 10101 Churchill Drive", "time": "6:00\u201310:30 PM", "category": "Music", "notes": "yourlocalbuzz.ca \u00b7 Greg Chiasson 7\u20139 PM then open mic", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-30", "day": "Sat", "event": "Pancake Breakfast (50+ Seniors Week)", "location": "Heritage Centre, 10112-102 Ave", "time": "9:00\u201311:30 AM", "category": "Food", "notes": "yourlocalbuzz.ca", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-30", "day": "Sat", "event": "Pool Tournament (50+ Seniors Week)", "location": "Heritage Centre, 10112-102 Ave", "time": "12:30 PM", "category": "Sport", "notes": "yourlocalbuzz.ca \u00b7 $10 entry, pre-register", "src": ""}, {"section": "MAY 21\u201331", "date": "2026-05-30", "day": "Sat", "event": "Plamondon Outdoor Rodeo (2nd Annual)", "location": "Plamondon Hall", "time": "Sat 11 AM\u2013Sun 3 PM", "category": "Sport", "notes": "allevents.in", "src": ""}, {"section": "JUNE 1\u201316", "date": "2026-06-02", "day": "Tue", "event": "Regular Council Meeting", "location": "Lac La Biche County", "time": "10:00 AM\u20134:00 PM", "category": "Council", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JUNE 1\u201316", "date": "2026-06-02", "day": "Tue", "event": "Strategic Committee of Council Meeting", "location": "Lac La Biche County", "time": "10:00 AM\u20134:00 PM", "category": "Council", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JUNE 1\u201316", "date": "2026-06-02", "day": "Tue", "event": "Bingo! (50+ Seniors Week)", "location": "Heritage Centre, 10112-102 Ave", "time": "11:30 AM\u20133:00 PM", "category": "Community", "notes": "yourlocalbuzz.ca \u00b7 Free entry", "src": ""}, {"section": "JUNE 1\u201316", "date": "2026-06-03", "day": "Wed", "event": "Community Development Workshop: Grant Writing", "location": "Lac La Biche County", "time": "6:00\u20139:00 PM", "category": "County", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JUNE 1\u201316", "date": "2026-06-04", "day": "Thu", "event": "Portage College Convocation 2026 \u2013 Day 1", "location": "Portage College", "time": "All day", "category": "County", "notes": "laclabichecounty.com \u00b7 Continues June 5", "src": "county"}, {"section": "JUNE 1\u201316", "date": "2026-06-04", "day": "Thu", "event": "Indigenous Art Exhibition", "location": "Lac La Biche County", "time": "All day", "category": "Arts", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JUNE 1\u201316", "date": "2026-06-04", "day": "Thu", "event": "Cattle Genetics Workshop", "location": "Lac La Biche County", "time": "2:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JUNE 1\u201316", "date": "2026-06-05", "day": "Fri", "event": "Portage College Convocation 2026 \u2013 Day 2", "location": "Portage College", "time": "All day", "category": "County", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JUNE 1\u201316", "date": "2026-06-05", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "JUNE 1\u201316", "date": "2026-06-06", "day": "Sat", "event": "Lady Bridgerton's Masquerade Ball", "location": "Stuart MacPherson Public Library, 8702 91st Ave", "time": "7:00\u201310:00 PM", "category": "Arts", "notes": "allevents.in \u00b7 Ages 13+", "src": ""}, {"section": "JUNE 1\u201316", "date": "2026-06-07", "day": "Sun", "event": "Venice Picnic 2026", "location": "Venice Rd, Lac La Biche County", "time": "9:30 AM", "category": "Food", "notes": "allevents.in \u00b7 Pasta & chicken cacciatore buffet", "src": ""}, {"section": "JUNE 1\u201316", "date": "2026-06-09", "day": "Tue", "event": "Kitchen Party Tour", "location": "Lac La Biche County", "time": "7:00\u20139:00 PM", "category": "Music", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JUNE 1\u201316", "date": "2026-06-12", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "JUNE 1\u201316", "date": "2026-06-12", "day": "Fri", "event": "Art Gallery at Stuart MacPherson Public Library (last day)", "location": "Stuart MacPherson Public Library", "time": "Until June 19", "category": "Arts", "notes": "lakelandtoday.ca \u00b7 Ongoing exhibition closing June 19", "src": "new"}, {"section": "JUNE 1\u201316", "date": "2026-06-12", "day": "Fri", "event": "Lakeland Minor Ball \u2013 League Finals Weekend 18U/U18 (Day 1)", "location": "Bold Centre Ball Diamonds", "time": "All weekend", "category": "Sport", "notes": "lakelandtoday.ca \u00b7 June 12\u201314", "src": "new"}, {"section": "JUNE 1\u201316", "date": "2026-06-13", "day": "Sat", "event": "Lemonade Day", "location": "Lac La Biche County", "time": "All day", "category": "County", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JUNE 1\u201316", "date": "2026-06-13", "day": "Sat", "event": "5th Annual Cornhole Tournament", "location": "Range Rd 115, McRae, AB", "time": "11:00 AM", "category": "Sport", "notes": "allevents.in \u00b7 $40/team, register by June 12 \u00b7 780-207-1794", "src": ""}, {"section": "JUNE 1\u201316", "date": "2026-06-16", "day": "Tue", "event": "Regular Council Meeting", "location": "Lac La Biche County", "time": "10:00 AM\u20134:00 PM", "category": "Council", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JUNE 1\u201316", "date": "2026-06-16", "day": "Tue", "event": "Strategic Committee of Council", "location": "Lac La Biche County", "time": "10:00 AM\u20134:00 PM", "category": "Council", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JUNE 17\u201330", "date": "2026-06-18", "day": "Thu", "event": "Protect Yourself from Fraud & Scams: Wise Owls, Alberta Rural Crime Watch", "location": "Lac La Biche County", "time": "10:00 AM\u201312:00 PM", "category": "Civic", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JUNE 17\u201330", "date": "2026-06-19", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "JUNE 17\u201330", "date": "2026-06-19", "day": "Fri", "event": "Lakeland Minor Ball \u2013 League Finals Weekend 9U/11U/15U (Day 1)", "location": "Bold Centre Ball Diamonds", "time": "All weekend", "category": "Sport", "notes": "lakelandtoday.ca \u00b7 June 19\u201321", "src": "new"}, {"section": "JUNE 17\u201330", "date": "2026-06-25", "day": "Thu", "event": "3rd Annual Road to Hope Spring Scramble (Golf)", "location": "Lac La Biche Golf & Country Club", "time": "8:30 AM", "category": "Sport", "notes": "allevents.in \u00b7 Charity golf, team reg open", "src": ""}, {"section": "JUNE 17\u201330", "date": "2026-06-26", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "JUNE 17\u201330", "date": "2026-06-27", "day": "Sat", "event": "Music in the Forest", "location": "Sir Winston Churchill Provincial Park", "time": "6:30\u20139:30 PM", "category": "Music", "notes": "laclabichecounty.com \u00b7 Monthly Alberta Parks series", "src": "county"}, {"section": "JULY", "date": "2026-07-01", "day": "Wed", "event": "Canada Day \u2013 Lac La Biche Mission Celebrations", "location": "Lac La Biche Mission, 67453 Mission Rd", "time": "All day (noon\u20135 PM activities)", "category": "Festival", "notes": "lakelandtoday.ca \u00b7 Pancake breakfast, mass, live entertainment, local artists", "src": "new"}, {"section": "JULY", "date": "2026-07-01", "day": "Wed", "event": "Canada Day \u2013 Free BBQ at Beaver Hill Shell", "location": "Beaver Hill Shell, Lac La Biche", "time": "All day", "category": "Food", "notes": "lakelandtoday.ca \u00b7 Free burgers, door prizes, customer appreciation", "src": "new"}, {"section": "JULY", "date": "2026-07-01", "day": "Wed", "event": "Canada Day Fireworks", "location": "McArthur Park, Lac La Biche Lake shoreline", "time": "11:00 PM", "category": "Festival", "notes": "lakelandtoday.ca \u00b7 Annual County fireworks display", "src": "new"}, {"section": "JULY", "date": "2026-07-03", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "JULY", "date": "2026-07-07", "day": "Tue", "event": "Regular Council Meeting", "location": "Lac La Biche County", "time": "10:00 AM\u20134:00 PM", "category": "Council", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JULY", "date": "2026-07-07", "day": "Tue", "event": "Strategic Committee of Council Meeting", "location": "Lac La Biche County", "time": "10:00 AM\u20134:00 PM", "category": "Council", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JULY", "date": "2026-07-10", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "JULY", "date": "2026-07-10", "day": "Fri", "event": "Healthier Communities Golf Tournament", "location": "Lac La Biche Golf & Country Club, 10 Provincial Park Rd", "time": "All day", "category": "Sport", "notes": "laclabichecounty.com \u00b7 County + Portage College + Health Foundation \u00b7 Confirm 2026 date", "src": "county"}, {"section": "JULY", "date": "2026-07-11", "day": "Sat", "event": "Battle on Beaver \u2013 WCKFT Fishing Qualifier", "location": "Beaver Lake Provincial Park", "time": "6:00 AM", "category": "Sport", "notes": "allevents.in \u00b7 Fishing tournament qualifier", "src": ""}, {"section": "JULY", "date": "2026-07-13", "day": "Mon", "event": "Bellz Edge Hockey Camp", "location": "Lac La Biche County", "time": "8:00 AM\u20135:00 PM", "category": "Sport", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JULY", "date": "2026-07-17", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "JULY", "date": "2026-07-18", "day": "Sat", "event": "Music in the Forest", "location": "Sir Winston Churchill Provincial Park", "time": "6:30\u20139:30 PM", "category": "Music", "notes": "laclabichecounty.com \u00b7 Monthly Alberta Parks series", "src": "county"}, {"section": "JULY", "date": "2026-07-24", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "JULY", "date": "2026-07-24", "day": "Fri", "event": "Lakeland Country Fair & Rodeo (Day 1)", "location": "Lac La Biche County", "time": "All day", "category": "Festival", "notes": "laclabichecounty.com \u00b7 Incl. Alberta Wife Carrying Championship", "src": "county"}, {"section": "JULY", "date": "2026-07-25", "day": "Sat", "event": "Lakeland Country Fair & Rodeo (Day 2)", "location": "Lac La Biche County", "time": "All day", "category": "Festival", "notes": "laclabichecounty.com", "src": "county"}, {"section": "JULY", "date": "2026-07-30", "day": "Thu", "event": "Lac La Biche Summer Days / Pow Wow & Fish Derby \u2014 begins", "location": "Bold Centre and various venues", "time": "Multi-day (Jul 30\u2013Aug 3)", "category": "Festival", "notes": "laclabicheregion.com \u00b7 Midway, Fish Derby, Ball Tournament, Parade, Fireworks, Pow Wow, Pancake Breakfasts", "src": ""}, {"section": "JULY", "date": "2026-07-31", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "AUGUST", "date": "2026-08-01", "day": "Sat", "event": "Summer Days Midway (Day 1)", "location": "Bold Centre, East Side", "time": "11:00 AM\u201311:00 PM", "category": "Festival", "notes": "goeastofedmonton.com", "src": "new"}, {"section": "AUGUST", "date": "2026-08-02", "day": "Sun", "event": "Fish Derby", "location": "Young's Beach Boat Launch", "time": "9:00 AM\u20137:00 PM", "category": "Sport", "notes": "goeastofedmonton.com \u00b7 Register via Fish Donkey App", "src": "new"}, {"section": "AUGUST", "date": "2026-08-02", "day": "Sun", "event": "Summer Days Midway (Day 2)", "location": "Bold Centre, East Side", "time": "11:00 AM\u201311:00 PM", "category": "Festival", "notes": "goeastofedmonton.com", "src": "new"}, {"section": "AUGUST", "date": "2026-08-03", "day": "Mon", "event": "Kids Fish Derby", "location": "Alexander Hamilton Park", "time": "11:30 AM\u20132:00 PM", "category": "Sport", "notes": "goeastofedmonton.com", "src": "new"}, {"section": "AUGUST", "date": "2026-08-03", "day": "Mon", "event": "Summer Days Midway (Day 3)", "location": "Bold Centre, East Side", "time": "11:00 AM\u201311:00 PM", "category": "Festival", "notes": "goeastofedmonton.com", "src": "new"}, {"section": "AUGUST", "date": "2026-08-07", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "AUGUST", "date": "2026-08-Jul/Aug", "day": "Daily", "event": "Free Drop-in Programming at Dumasfield Park & Jubilee Park", "location": "Dumasfield Park & Jubilee Park, Young's Beach", "time": "12:30\u20134:30 PM", "category": "Recreation", "notes": "boldcenter.ca \u00b7 Recreation staff, sports, games, crafts, outdoor activities \u00b7 July & August daily", "src": "new"}, {"section": "AUGUST", "date": "2026-08-14", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "AUGUST", "date": "2026-08-15", "day": "Sat", "event": "Music in the Forest", "location": "Sir Winston Churchill Provincial Park", "time": "6:30\u20139:30 PM", "category": "Music", "notes": "laclabichecounty.com \u00b7 Monthly Alberta Parks series", "src": "county"}, {"section": "AUGUST", "date": "2026-08-14", "day": "~Fri", "event": "Kikino Silver Birch Rodeo & Celebration Days (confirm dates \u2014 3rd weekend Aug)", "location": "Kikino M\u00e9tis Settlement (~40 km south of Lac La Biche)", "time": "Multi-day", "category": "Festival", "notes": "goeastofedmonton.com \u00b7 Confirm 2026 dates", "src": "new"}, {"section": "AUGUST", "date": "2026-08-18", "day": "Tue", "event": "Regular Council Meeting", "location": "Lac La Biche County", "time": "10:00 AM\u20134:00 PM", "category": "Council", "notes": "laclabichecounty.com", "src": "county"}, {"section": "AUGUST", "date": "2026-08-18", "day": "Tue", "event": "Strategic Committee of Council", "location": "Lac La Biche County", "time": "10:00 AM\u20134:00 PM", "category": "Council", "notes": "laclabichecounty.com", "src": "county"}, {"section": "AUGUST", "date": "2026-08-21", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "AUGUST", "date": "2026-08-23", "day": "~Sun", "event": "Hylo / Venice Harvest Days (confirm dates)", "location": "Hylo / Venice area, Lac La Biche County", "time": "Multi-day", "category": "Festival", "notes": "festivalseekers.com \u00b7 Horticultural show, annual late August", "src": "new"}, {"section": "AUGUST", "date": "2026-08-23", "day": "~Sun", "event": "Lac La Biche Traditional Pow Wow (confirm date)", "location": "Bold Centre Sports Field", "time": "One day", "category": "Festival", "notes": "goeastofedmonton.com \u00b7 Annual, confirm 2026 date", "src": "new"}, {"section": "AUGUST", "date": "2026-08-23", "day": "~Sun", "event": "Alberta Open Farm Days (confirm dates)", "location": "Local farms & markets, Lac La Biche region", "time": "TBC", "category": "Community", "notes": "goeastofedmonton.com \u00b7 Annual late August", "src": "new"}, {"section": "AUGUST", "date": "2026-08-28", "day": "Fri", "event": "Lac La Biche Farmers Market", "location": "Lac La Biche", "time": "3:00\u20135:00 PM", "category": "County", "notes": "laclabichecounty.com \u00b7 Every Friday", "src": "county"}, {"section": "AUGUST", "date": "2026-08-28", "day": "Sat", "event": "Mission Family Picnic", "location": "Lac La Biche Mission, 67453 Mission Rd", "time": "11:00 AM", "category": "Community", "notes": "laclabichemission.com \u00b7 End of summer family event, variety of activities", "src": "new"}, {"section": "AUGUST", "date": "2026-TBC", "day": "TBC", "event": "Bold Centre New Aquatic Centre Grand Opening (date TBC)", "location": "Bold Centre, 8702 91st Ave", "time": "TBC", "category": "Festival", "notes": "boldcentreaquatics.com \u00b7 $46M facility \u00b7 15th anniversary of Bold Centre \u00b7 Confirm official date", "src": ""}];
+
+let activeCategory = 'All';
+
+function setCategory(btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeCategory = btn.dataset.cat;
+  applyFilters();
+}
+
+function applyFilters() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const filtered = EVENTS.filter(e => {
+    const catMatch = activeCategory === 'All' || e.category === activeCategory;
+    if (!catMatch) return false;
+    if (!q) return true;
+    return [e.event, e.location, e.date, e.time, e.notes, e.category].some(
+      f => f && f.toLowerCase().includes(q)
+    );
+  });
+  renderEvents(filtered);
+}
+
+function renderEvents(list) {
+  const container = document.getElementById('mainContent');
+  document.getElementById('resultCount').textContent = `${list.length} event${list.length !== 1 ? 's' : ''}`;
+
+  if (!list.length) {
+    container.innerHTML = '<div class="no-results">No events match your search. Try a different keyword or category.</div>';
+    return;
+  }
+
+  // Group by section
+  const sections = [];
+  const sectionMap = {};
+  list.forEach(e => {
+    if (!sectionMap[e.section]) {
+      sectionMap[e.section] = [];
+      sections.push(e.section);
+    }
+    sectionMap[e.section].push(e);
+  });
+
+  let html = '';
+  sections.forEach(sec => {
+    html += `<div class="section-header">${sec}</div>`;
+    html += `<table class="events-table">
+      <thead><tr>
+        <th>Date</th>
+        <th class="hide-mobile">Day</th>
+        <th>Event</th>
+        <th class="hide-mobile">Location</th>
+        <th class="hide-mobile">Time</th>
+      </tr></thead><tbody>`;
+
+    sectionMap[sec].forEach(e => {
+      const srcClass = e.src === 'county' ? 'src-county' : e.src === 'new' ? 'src-new' : '';
+      const badge = `<span class="cat-badge badge-${e.category}">${e.category}</span>`;
+      const notesHtml = e.notes ? `<div class="ev-notes">${e.notes}</div>` : '';
+      html += `<tr class="${srcClass}">
+        <td class="td-date">${e.date}</td>
+        <td class="td-day hide-mobile">${e.day}</td>
+        <td class="td-event">${e.event}${badge}${notesHtml}</td>
+        <td class="td-loc hide-mobile">${e.location}</td>
+        <td class="td-time hide-mobile">${e.time}</td>
+      </tr>`;
+    });
+
+    html += `</tbody></table>`;
+  });
+
+  container.innerHTML = html;
+}
+
+// Initial render
+applyFilters();
+</script>
+</body>
+</html>
